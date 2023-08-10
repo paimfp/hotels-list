@@ -1,0 +1,32 @@
+
+<ng-container *ngIf="hotels?.length; else emptyState;">
+    <div *ngFor="let hotel of hotels; index as i;" class="card">
+        <div class="relative">
+            <nz-carousel [nzEffect]="'scrollx'" #carousels>
+                <div nz-carousel-content *ngFor="let image of hotel.images">
+                    <div [style]="{ 'background-image': 'url(' + (image | encodeUri) + ')', 'background-size': 'cover' }" class="h-100 img-bg">
+                    </div>
+                </div>
+            </nz-carousel>
+            <button (click)="prevPhoto(i)" class="listCarouselButton prev"><span nz-icon nzType="left" nzTheme="outline"></span></button>
+            <button (click)="nextPhoto(i)" class="listCarouselButton next"><span nz-icon nzType="right" nzTheme="outline"></span></button>
+        </div>
+        <div class="border-right border-bg border-thick-4 p-20 p-y-0">
+            <div>{{ hotel.name }}</div>
+            <div>{{ hotel.address.city }}, {{ hotel.address.fullAddress }}</div>
+            <div>{{ hotel.stars }}</div>
+            <div *ngIf="hotel.hasRefundableRoom">Reembolsável</div>
+        </div>
+    <div class="flex justify-content-center align-items-center">
+        <button (click)="openDetail(i)" class="btn">Selectionar</button>
+    </div>
+    </div>
+    <div *ngIf="endList" class="text-center p-y-20">Fim da lista de hoteis</div>
+</ng-container>
+
+
+<ng-template #emptyState>
+    <div class="emptyState text-center">
+        Sem hoteis para mostrar, adicione ou mude o filtro para ver hoteis incríveis!
+    </div>
+</ng-template>

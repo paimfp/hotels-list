@@ -1,0 +1,14 @@
+<div class="container">
+
+    <app-filter
+        [buscarBtnLabel]="buscarBtnLabel"
+        [inputValue]="inputValue"
+        [allPlaces]="allPlaces"
+        [sortBy]="sortBy"
+    ></app-filter>
+    
+    <app-list
+        [hotels]="filteredHotels"
+        [endList]="endList"
+    ></app-list>
+</div>

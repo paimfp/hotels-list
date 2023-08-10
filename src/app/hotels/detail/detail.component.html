@@ -1,0 +1,34 @@
+<p>{{ hotelData.stars }} estrelas</p>
+
+<h2>{{ hotelData.name }}</h2>
+<p>{{ hotelData.address.fullAddress }}</p>
+
+<div class="relative detailCarouselWrapper">
+    <nz-carousel [nzEffect]="'scrollx'" [nzDots]="false" #carousel>
+        <div nz-carousel-content *ngFor="let image of hotelData.images;">
+            <div [style]="{ 'background-image': 'url(' + (image | encodeUri) + ')', 'background-size': 'cover' }" class="h-100 img-bg border-rarius-7">
+            </div>
+        </div>
+    </nz-carousel>
+    <div class="counter-img"> {{currentImgIdx + 1}}/{{hotelData.images.length}} </div>
+    <button (click)="prevPhoto()" class="listCarouselButton prev"><span nz-icon nzType="left" nzTheme="outline"></span></button>
+    <button (click)="nextPhoto()" class="listCarouselButton next"><span nz-icon nzType="right" nzTheme="outline"></span></button>
+</div>
+
+<div>
+    <h3>Facilidades do Hotel</h3>
+    <span *ngFor="let a of hotelData.amenities" class="chip">{{ a.label }}</span>
+</div>
+
+<div>
+    <h3>Conheça um pouco mais</h3>
+    <p>{{ hotelData.description }}</p>
+</div>
+
+
+
+
+
+<!-- <pre>
+    {{ hotelData | json }}
+</pre> -->
