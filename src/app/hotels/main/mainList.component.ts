@@ -27,7 +27,6 @@ export class MainListComponent {
     private route: ActivatedRoute,
   ) {
     route.queryParams.subscribe(params => {
-      console.log(params);
       if (params['sortBy']) {
         this.sortBy = params['sortBy'];
       }
@@ -50,7 +49,6 @@ export class MainListComponent {
         .set('recomendado', (a: Hotel, b: Hotel) => parseInt(b.stars) - parseInt(a.stars))
     
     this.hotelsInPlace = allHotels.find(h => h.placeId == parseInt(placeId))?.hotels as Hotel[];
-    console.log(this.hotelsInPlace);
     this.hotelsInPlace.sort(sortAction.get(sortBy)!);
     
     this.getMoreHotels(true);
@@ -67,15 +65,14 @@ export class MainListComponent {
         this.endList = true;
       }
     // }
-    console.log(this.filteredHotels);
+    // console.log(this.filteredHotels);
     
   }
 
   listenToScroll() {
     fromEvent(document, 'scroll').pipe(throttleTime(100, asyncScheduler, { trailing: true })).subscribe((e: Event) => {
-      console.log(e);
+      // console.log(e);
       let scrollFromBottom = document.documentElement.scrollHeight - ( document.documentElement.clientHeight + window.scrollY );
-      console.log(scrollFromBottom);
       if (scrollFromBottom < 150) {
         this.getMoreHotels();
       }
